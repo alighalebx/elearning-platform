@@ -28,10 +28,31 @@ const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 const updateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    // Implementation for updating user
+    const userId = req.params.userId;
+    const { firstName, lastName, email, password } = req.body;
+    try {
+        const user = yield User_1.default.findByIdAndUpdate(userId, { firstName, lastName, email, password }, { new: true });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        return res.status(200).json({ message: 'User updated successfully', user });
+    }
+    catch (error) {
+        next(error);
+    }
 });
 const deleteUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    // Implementation for deleting user
+    const userId = req.params.userId;
+    try {
+        const user = yield User_1.default.findByIdAndDelete(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        return res.status(200).json({ message: 'User deleted successfully' });
+    }
+    catch (error) {
+        next(error);
+    }
 });
 const UserController = {
     createUser,

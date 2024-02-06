@@ -8,8 +8,8 @@ const dotenv_1 = __importDefault(require("dotenv"));
 // import connectDB from './utils/db';
 const mongoose_1 = __importDefault(require("mongoose"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
-// import courseRoutes from './routes/courseRoutes';
-// import gradeRoutes from './routes/gradeRoutes';
+const courseRoutes_1 = __importDefault(require("./routes/courseRoutes"));
+const gradeRoutes_1 = __importDefault(require("./routes/gradeRoutes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 // Connect to MongoDB
@@ -24,8 +24,8 @@ db.once('open', () => console.log('Connected to MongoDB'));
 app.use(express_1.default.json());
 // Routes
 app.use('/users', userRoutes_1.default);
-// app.use('/courses', courseRoutes);
-// app.use('/grades', gradeRoutes);
+app.use('/courses', courseRoutes_1.default);
+app.use('/grades', gradeRoutes_1.default);
 // Error Handling Middleware
 // app.use((err, req, res, next) => {
 //   console.error(err.stack);
